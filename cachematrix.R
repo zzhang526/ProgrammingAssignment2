@@ -1,17 +1,22 @@
-#TEST first commit
 
-## Put comments here that give an overall description of what your
-## functions do
+## Calculate the inverse of given matrix.
+## Result will be cached and can be used directly next time.
 
-## Write a short comment describing this function
-
+## Caches the inverse of x in x.inverse. 
+## Also caches the original matrix in x.oldValue.
 makeCacheMatrix <- function(x = matrix()) {
-
+  x.oldValue <- x
+  x.inverse <- solve(x)
 }
 
-
-## Write a short comment describing this function
-
+## If x doesn't have cached values or x is changed,
+## calculates the inverse and cached it.
+## Otherwise return the cached inverse.
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  if (!exists("x.oldValue") || 
+      !exists("x.inverse") || 
+      !all.equal(x, x.oldValue)) {
+    makeCacheMatrix(x)
+  }
+  x.inverse
 }
